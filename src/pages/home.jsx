@@ -1,5 +1,5 @@
 import MovieCard from "../components/MovieCard";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import "../css/home.css";
 import { searchMovies, getPopularMovies } from "../services/api";
 
@@ -8,26 +8,43 @@ function Home() {
   const [movies, setMovies] = useState([]);
   const [err, setErr] = useState(null);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const loadPopularMovies = async () => {
       try {
         const popularMovies = await getPopularMovies();
         setMovies(popularMovies);
       } catch (err) {
-        console.error("Failed to fetch popular movies:", err);
+        console.log("Failed to fetch popular movies:", err);
         setErr("Failed to load popular movies. Please try again later.");
       } finally {
         setLoading(false);
       }
     };
+
     loadPopularMovies();
   }, []);
 
-  function handleSearch(e) {
+  async function handleSearch(e) {
     e.preventDefault();
-    alert(searchQuery);
-  }
+    if (!searchQuery.trim()) return;
 
+    if (loading) return;
+    setLoading(true);
+    try {
+      const searchResult = await searchMovies(searchQuery);
+      setMovies(searchResult);
+      setErr(null);
+    } catch {
+      console.log(err);
+      setErr("Failed to search Movies..");
+    } finally {
+      setLoading(false);
+    }
+  }
+  {
+    err && <div className="error-messages">{err}</div>;
+  }
   return (
     <div className="home">
       <form onSubmit={handleSearch} className="search-form">
@@ -36,8 +53,15 @@ function Home() {
           Search
         </button>
       </form>
-
-      <div className="movies-grid">{movies.map((movie) => movie.title.toLowerCase().startsWith(searchQuery.toLowerCase()) && <MovieCard movie={movie} key={movie.id} />)}</div>
+      {loading ? (
+        <div className="loading">Loading</div>
+      ) : (
+        <div className="movies-grid">
+          {movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
