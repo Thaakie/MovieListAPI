@@ -6,7 +6,7 @@ function NavBar() {
     <nav className="navbar">
       <div className="navbar-brands">
         <Link to="/" className="navbar-logo">
-          MoviesList
+          KieeList
         </Link>
       </div>
       <div className="navbar-links">

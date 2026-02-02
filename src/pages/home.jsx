@@ -48,11 +48,12 @@ function Home() {
   return (
     <div className="home">
       <form onSubmit={handleSearch} className="search-form">
-        <input type="text" placeholder="Search movies..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+        <input type="text" className="search-input" placeholder="Search movies..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         <button type="submit" className="search-button">
           Search
         </button>
       </form>
+
       {loading ? (
         <div className="loading">Loading</div>
       ) : (
