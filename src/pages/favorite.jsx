@@ -9,7 +9,7 @@ function Favorites() {
     return (
       <div className="favorite-page">
         <h3>Not yet</h3>
-        <p>Try adding some movies ❤️</p>
+        <p>Try favouriting some movies ᰔ</p>
       </div>
     );
   }

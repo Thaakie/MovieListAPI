@@ -59,3 +59,11 @@
 .favorite-btn {
   justify-self: center;
 }
+
+.favorite-page {
+  text-align: center;
+}
+
+.favorites-grid {
+  margin-top: 30px;
+}
