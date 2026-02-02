@@ -7,13 +7,11 @@ export const useMovieContext = () => useContext(MovieContext);
 export const MovieProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  // load dari localStorage
   useEffect(() => {
     const storedFavs = localStorage.getItem("favorites");
     if (storedFavs) setFavorites(JSON.parse(storedFavs));
   }, []);
 
-  // simpan ke localStorage
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
