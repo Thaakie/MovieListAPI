@@ -22,6 +22,7 @@ function Favorites() {
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum voluptates error nemo magnam aliquam nulla tenetur saepe eveniet ex consequatur!</p>
     </div>
   );
 }
